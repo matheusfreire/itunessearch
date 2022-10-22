@@ -1,4 +1,4 @@
-package com.msf.itunessearch
+package com.msf.itunessearch.ui
 
 import android.content.ClipData
 import android.content.ClipDescription
@@ -14,6 +14,7 @@ import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
+import com.msf.itunessearch.R
 import com.msf.itunessearch.placeholder.PlaceholderContent;
 import com.msf.itunessearch.databinding.FragmentItemListBinding
 import com.msf.itunessearch.databinding.ItemListContentBinding

@@ -12,5 +12,5 @@
         android:layout_height="match_parent"
         android:padding="16dp"
         android:textIsSelectable="true"
-        tools:context="com.msf.itunessearch.ItemDetailFragment" />
+        tools:context="com.msf.itunessearch.ui.ItemDetailFragment" />
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

@@ -12,16 +12,14 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Itunessearch"
-        tools:targetApi="31">
+        android:name=".core.ItunesSearchApp"
+        tools:targetApi="32">
         <activity
-            android:name=".ItemDetailHostActivity"
+            android:name=".ui.ItemDetailHostActivity"
             android:exported="true"
-            android:label="@string/app_name"
-            android:resizeableActivity="true"
-            tools:targetApi="24">
+            android:resizeableActivity="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>

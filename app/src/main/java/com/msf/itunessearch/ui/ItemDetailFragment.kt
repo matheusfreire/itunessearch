@@ -1,4 +1,4 @@
-package com.msf.itunessearch
+package com.msf.itunessearch.ui
 
 import android.content.ClipData
 import android.os.Bundle
