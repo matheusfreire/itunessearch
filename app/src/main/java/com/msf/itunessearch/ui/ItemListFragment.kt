@@ -15,27 +15,12 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.msf.itunessearch.R
-import com.msf.itunessearch.placeholder.PlaceholderContent;
 import com.msf.itunessearch.databinding.FragmentItemListBinding
 import com.msf.itunessearch.databinding.ItemListContentBinding
-
-/**
- * A Fragment representing a list of Pings. This fragment
- * has different presentations for handset and larger screen devices. On
- * handsets, the fragment presents a list of items, which when touched,
- * lead to a {@link ItemDetailFragment} representing
- * item details. On larger screens, the Navigation controller presents the list of items and
- * item details side-by-side using two vertical panes.
- */
+import com.msf.itunessearch.placeholder.PlaceholderContent
 
 class ItemListFragment : Fragment() {
 
-    /**
-     * Method to intercept global key events in the
-     * item list fragment to trigger keyboard shortcuts
-     * Currently provides a toast when Ctrl + Z and Ctrl + F
-     * are triggered
-     */
     private val unhandledKeyEventListenerCompat =
         ViewCompat.OnUnhandledKeyEventListenerCompat { v, event ->
             if (event.keyCode == KeyEvent.KEYCODE_Z && event.isCtrlPressed) {
@@ -63,13 +48,12 @@ class ItemListFragment : Fragment() {
     private val binding get() = _binding!!
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
+        inflater: LayoutInflater,
+        container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-
         _binding = FragmentItemListBinding.inflate(inflater, container, false)
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -90,9 +74,9 @@ class ItemListFragment : Fragment() {
         recyclerView: RecyclerView,
         itemDetailFragmentContainer: View?
     ) {
-
         recyclerView.adapter = SimpleItemRecyclerViewAdapter(
-            PlaceholderContent.ITEMS, itemDetailFragmentContainer
+            PlaceholderContent.ITEMS,
+            itemDetailFragmentContainer
         )
     }
 
@@ -103,11 +87,9 @@ class ItemListFragment : Fragment() {
         RecyclerView.Adapter<SimpleItemRecyclerViewAdapter.ViewHolder>() {
 
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
-
             val binding =
                 ItemListContentBinding.inflate(LayoutInflater.from(parent.context), parent, false)
             return ViewHolder(binding)
-
         }
 
         override fun onBindViewHolder(holder: ViewHolder, position: Int) {
@@ -184,7 +166,6 @@ class ItemListFragment : Fragment() {
             val idView: TextView = binding.idText
             val contentView: TextView = binding.content
         }
-
     }
 
     override fun onDestroyView() {

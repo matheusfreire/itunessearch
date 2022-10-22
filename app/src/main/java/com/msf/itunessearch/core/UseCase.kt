@@ -8,11 +8,11 @@ abstract class UseCase<out T, in Params>(
     private val contextProvider: CoroutinesContextProvider
 ) {
 
-    abstract suspend fun run(params: Params? = null): Either<T, Throwable>
+    abstract suspend fun run(params: Params): Either<T, Throwable>
 
     operator fun invoke(
         scope: CoroutineScope,
-        params: Params? = null,
+        params: Params,
         onError: ((Throwable) -> Unit) = {},
         onSuccess: (T) -> Unit
     ) {
