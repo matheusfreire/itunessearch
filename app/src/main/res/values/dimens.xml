@@ -18,4 +18,5 @@
     <dimen name="padding_label_start">4dp</dimen>
     <dimen name="padding_label_end">0dp</dimen>
     <dimen name="margin_info_layout">8dp</dimen>
+    <dimen name="padding_input_search">5dp</dimen>
 </resources>

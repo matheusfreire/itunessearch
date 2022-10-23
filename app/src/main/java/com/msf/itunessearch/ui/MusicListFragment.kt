@@ -50,35 +50,35 @@ class MusicListFragment : Fragment() {
                 is ItunesUiState.Error -> showMessageLayout(uiState.message, R.drawable.ic_error)
             }
         }
-        binding.txtInputEdit?.textInputAsFlow()
-            ?.onEach {
+        binding.txtInputEdit.textInputAsFlow()
+            .onEach {
                 itunesSearchViewModel.fetchMusic(
                     it.toString(),
                     requireContext().resources.configuration.locales[0].country
                 )
             }
-            ?.debounce(750)
-            ?.launchIn(lifecycleScope)
+            .debounce(750)
+            .launchIn(lifecycleScope)
     }
 
     private fun showLoadingView(showLoading: Boolean) {
-        binding.progressBar?.isVisible = showLoading
-        binding.msgLayout?.msgEmptyLayout?.isVisible = false
-        binding.msgLayout?.imageEmptyLayout?.isVisible = false
+        binding.progressBar.isVisible = showLoading
+        binding.msgLayout.msgEmptyLayout.isVisible = false
+        binding.msgLayout.imageEmptyLayout.isVisible = false
     }
 
     private fun showMessageLayout(message: String, @DrawableRes img: Int) {
         binding.itemList.isVisible = false
-        binding.progressBar?.isVisible = false
+        binding.progressBar.isVisible = false
         showEmptyLayout(message, img)
-        binding.msgLayout?.msgEmptyLayout?.isVisible = true
-        binding.msgLayout?.imageEmptyLayout?.isVisible = true
+        binding.msgLayout.msgEmptyLayout.isVisible = true
+        binding.msgLayout.imageEmptyLayout.isVisible = true
     }
 
     private fun showEmptyLayout(msg: String, @DrawableRes drawable: Int) {
-        binding.msgLayout?.let {
-            it.msgEmptyLayout.text = msg
-            it.imageEmptyLayout.setImageResource(drawable)
+        with(binding.msgLayout) {
+            this.msgEmptyLayout.text = msg
+            this.imageEmptyLayout.setImageResource(drawable)
         }
     }
 

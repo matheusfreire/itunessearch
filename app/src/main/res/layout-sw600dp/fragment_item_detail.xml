@@ -208,5 +208,35 @@
                 android:gravity="center_vertical" />
         </LinearLayout>
 
+        <LinearLayout
+            android:id="@+id/linearLayoutMusicDuration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_info_detail"
+            android:background="@drawable/border_info_music"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutMusicExplicit">
+
+            <TextView
+                style="@style/TextViewDetailLabel"
+                android:layout_width="@dimen/height_adaptable"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="@string/duration" />
+
+            <TextView
+                android:id="@+id/musicDetailDuration"
+                style="@style/TextViewDetailInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="end"
+                tools:text="@string/title" />
+        </LinearLayout>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

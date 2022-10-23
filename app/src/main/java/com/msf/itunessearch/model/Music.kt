@@ -29,7 +29,7 @@ data class Music(
     val trackName: String,
     val trackNumber: Int,
     val trackPrice: Double,
-    val trackTimeMillis: Int,
+    val trackTimeMillis: Long,
     val trackViewUrl: String,
     val wrapperType: String
 )

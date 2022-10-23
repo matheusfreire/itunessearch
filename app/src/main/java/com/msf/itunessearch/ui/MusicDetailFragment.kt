@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.msf.itunessearch.R
 import com.msf.itunessearch.databinding.FragmentItemDetailBinding
+import com.msf.itunessearch.extensions.convertDurationToHumanReadable
 import com.msf.itunessearch.extensions.isExplicit
 import com.msf.itunessearch.extensions.toFormatDate
 import com.msf.itunessearch.model.Music
@@ -48,16 +49,15 @@ class MusicDetailFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         with(binding) {
-            musicTitle?.text = item.trackName
-            musicDetailArtist?.text = item.artistName
-            musicDetailAlbumText?.text = item.collectionName
-            musicDetailAlbum?.let {
-                Glide.with(requireContext()).load(item.artworkUrl100).placeholder(R.drawable.ic_music)
-                    .into(it)
-            }
-            musicDetailGenre?.text = item.primaryGenreName
-            musicDetailReleaseDate?.text = item.releaseDate.toFormatDate()
-            musicExplicit?.isChecked = item.trackExplicitness.isExplicit()
+            musicTitle.text = item.trackName
+            musicDetailArtist.text = item.artistName
+            musicDetailAlbumText.text = item.collectionName
+            Glide.with(requireContext()).load(item.artworkUrl100).placeholder(R.drawable.ic_music)
+                .into(musicDetailAlbum)
+            musicDetailGenre.text = item.primaryGenreName
+            musicDetailReleaseDate.text = item.releaseDate.toFormatDate()
+            musicExplicit.isChecked = item.trackExplicitness.isExplicit()
+            musicDetailDuration.text = item.trackTimeMillis.convertDurationToHumanReadable()
         }
     }
 
