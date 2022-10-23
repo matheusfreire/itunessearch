@@ -13,22 +13,22 @@ class ItunesSearchUseCase(
     private val repository: ItunesSearchRepository,
     contextProvider: CoroutinesContextProvider,
     private val requestWrapper: RequestWrapper
-) : UseCase<List<Music>?, Pair<String, String>>(contextProvider) {
-    override suspend fun run(params: Pair<String, String>): Either<List<Music>?, Throwable> =
+) : UseCase<ResultWrapper<TracksResponse>, Pair<String, String>>(contextProvider) {
+    override suspend fun run(params: Pair<String, String>): Either<ResultWrapper<TracksResponse>, Throwable> =
         requestWrapper.wrapper {
             when (val result = repository.fetchMusics(params.first, params.second)) {
                 is ResultWrapper.Success -> handleSuccess(result)
-                is ResultWrapper.GenericError -> null
-                else -> null
+                is ResultWrapper.GenericError -> result
+                else -> ResultWrapper.NetworkError
             }
         }
 
-    private fun handleSuccess(result: ResultWrapper.Success<TracksResponse>): List<Music> {
+    private fun handleSuccess(result: ResultWrapper.Success<TracksResponse>): ResultWrapper<TracksResponse> {
         val totalResults = result.value.resultCount
         return if (totalResults > 0) {
-            result.value.musics
+            ResultWrapper.Success(result.value)
         } else {
-            emptyList()
+            ResultWrapper.GenericError(404, "No musics founded with your criteria")
         }
     }
 }

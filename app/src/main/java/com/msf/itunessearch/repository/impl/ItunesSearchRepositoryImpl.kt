@@ -1,6 +1,5 @@
 package com.msf.itunessearch.repository.impl
 
-import com.google.gson.Gson
 import com.msf.itunessearch.model.TracksResponse
 import com.msf.itunessearch.network.ItunesService
 import com.msf.itunessearch.network.ResultWrapper
@@ -13,9 +12,9 @@ class ItunesSearchRepositoryImpl(private val itunesService: ItunesService) : Itu
             val fetchTracks = itunesService.fetchMusics(query, country)
             ResultWrapper.Success(fetchTracks)
         } catch (e: HttpException) {
-            val errorBody = e.response()?.errorBody()?.string()
-            val error = Gson().fromJson(errorBody, Error::class.java)
-            ResultWrapper.GenericError(e.code(), error)
+            ResultWrapper.GenericError(e.code(), e.message())
+        } catch (e: Exception) {
+            ResultWrapper.GenericError(999, "Something weird happens")
         }
     }
 }

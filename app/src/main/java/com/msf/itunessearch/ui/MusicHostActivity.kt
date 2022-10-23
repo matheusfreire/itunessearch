@@ -9,14 +9,10 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import com.msf.itunessearch.R
 import com.msf.itunessearch.databinding.ActivityItemDetailBinding
-import com.msf.itunessearch.viewmodel.ItunesSearchViewModel
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class ItemDetailHostActivity : AppCompatActivity() {
+class MusicHostActivity : AppCompatActivity() {
 
     private lateinit var appBarConfiguration: AppBarConfiguration
-
-    private val itunesSearchViewModel: ItunesSearchViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -29,7 +25,6 @@ class ItemDetailHostActivity : AppCompatActivity() {
         val navController = navHostFragment.navController
         appBarConfiguration = AppBarConfiguration(navController.graph)
         setupActionBarWithNavController(navController, appBarConfiguration)
-        itunesSearchViewModel.fetchMusic()
     }
 
     override fun onSupportNavigateUp(): Boolean {

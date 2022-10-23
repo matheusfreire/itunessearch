@@ -18,7 +18,7 @@
         android:name=".core.ItunesSearchApp"
         tools:targetApi="32">
         <activity
-            android:name=".ui.ItemDetailHostActivity"
+            android:name=".ui.MusicHostActivity"
             android:exported="true"
             android:resizeableActivity="true">
             <intent-filter>
