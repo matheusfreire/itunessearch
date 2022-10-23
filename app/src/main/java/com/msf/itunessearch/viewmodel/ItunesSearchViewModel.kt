@@ -15,6 +15,9 @@ class ItunesSearchViewModel(
     val uiStateLiveData = _uiStateLiveData
     private var musics = emptyList<Music>()
 
+    private val _titleFragment = MutableLiveData<String>()
+    val titleFragmentLiveData = _titleFragment
+
     init {
         _uiStateLiveData.postValue(ItunesUiState.Empty)
     }
@@ -54,5 +57,9 @@ class ItunesSearchViewModel(
             return musics[position]
         }
         return null
+    }
+
+    fun setTitleActivity(title: String) {
+        _titleFragment.postValue(title)
     }
 }

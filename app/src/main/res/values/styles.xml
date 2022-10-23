@@ -3,4 +3,15 @@
     <style name="ContentLoadingProgress">
         <item name="colorAccent">@color/purple_700</item>
     </style>
+
+    <style name="TextViewDetailInfo" parent="TextAppearance.AppCompat.Medium">
+        <item name="android:textColor">@color/black</item>
+        <item name="android:paddingStart">@dimen/padding_start_detail</item>
+        <item name="android:paddingEnd">@dimen/padding_end_detail</item>
+    </style>
+
+    <style name="TextViewDetailLabel" parent="TextAppearance.AppCompat.Small">
+        <item name="android:paddingStart">@dimen/padding_label_start</item>
+        <item name="android:paddingEnd">@dimen/padding_label_end</item>
+    </style>
 </resources>

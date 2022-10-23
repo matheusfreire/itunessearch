@@ -10,11 +10,12 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.msf.itunessearch.R
-import com.msf.itunessearch.databinding.FragmentItemListBinding
+import com.msf.itunessearch.databinding.FragmentMusicListBinding
 import com.msf.itunessearch.extensions.textInputAsFlow
 import com.msf.itunessearch.model.Music
 import com.msf.itunessearch.viewmodel.ItunesSearchViewModel
 import com.msf.itunessearch.viewmodel.ItunesUiState
+import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -23,7 +24,7 @@ import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 class MusicListFragment : Fragment() {
 
     private val itunesSearchViewModel by sharedViewModel<ItunesSearchViewModel>()
-    private var _binding: FragmentItemListBinding? = null
+    private var _binding: FragmentMusicListBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -31,10 +32,11 @@ class MusicListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _binding = FragmentItemListBinding.inflate(inflater, container, false)
+        _binding = FragmentMusicListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
+    @OptIn(FlowPreview::class)
     override fun onResume() {
         super.onResume()
         itunesSearchViewModel.uiStateLiveData.observe(viewLifecycleOwner) { uiState ->
@@ -67,6 +69,7 @@ class MusicListFragment : Fragment() {
 
     private fun showMessageLayout(message: String, @DrawableRes img: Int) {
         binding.itemList.isVisible = false
+        binding.progressBar?.isVisible = false
         showEmptyLayout(message, img)
         binding.msgLayout?.msgEmptyLayout?.isVisible = true
         binding.msgLayout?.imageEmptyLayout?.isVisible = true

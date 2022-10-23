@@ -1,13 +1,10 @@
 package com.msf.itunessearch.ui
 
-import android.content.ClipData
-import android.content.ClipDescription
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
@@ -53,33 +50,6 @@ class MusicAdapter(
                 } else {
                     itemView.findNavController().navigate(R.id.show_item_detail, bundle)
                 }
-            }
-            setOnContextClickListener { v ->
-                val item = v.tag as Music
-                Toast.makeText(
-                    v.context,
-                    "Context click of item " + item.trackId.toString(),
-                    Toast.LENGTH_LONG
-                ).show()
-                true
-            }
-
-            setOnLongClickListener { v ->
-                // Setting the item id as the clip data so that the drop target is able to
-                // identify the id of the content
-                val clipItem = ClipData.Item(music.trackId.toString())
-                val dragData = ClipData(
-                    v.tag as? CharSequence,
-                    arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN),
-                    clipItem
-                )
-
-                v.startDragAndDrop(
-                    dragData,
-                    View.DragShadowBuilder(v),
-                    null,
-                    0
-                )
             }
         }
     }

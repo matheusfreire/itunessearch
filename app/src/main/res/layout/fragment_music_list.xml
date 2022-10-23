@@ -54,7 +54,6 @@
         android:name="com.msf.itunessearch.ItemListFragment"
         android:layout_width="match_parent"
         android:layout_height="@dimen/height_adaptable"
-        android:layout_marginHorizontal="@dimen/padding_list"
         android:layout_marginTop="@dimen/margin_top_list"
         app:layoutManager="LinearLayoutManager"
         app:layout_constraintTop_toBottomOf="@id/textInputLayoutSearch"

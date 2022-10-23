@@ -1,16 +1,212 @@
-<!-- Adding the same root's ID for view binding as other layout configurations -->
-<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/item_detail_container"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/item_detail"
-        style="?android:attr/textAppearanceLarge"
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/item_detail_container"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:padding="16dp"
-        android:textIsSelectable="true"
-        tools:context="com.msf.itunessearch.ui.MusicDetailFragment" />
-</androidx.coordinatorlayout.widget.CoordinatorLayout>
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/margin_info_layout"
+        tools:context=".ui.MusicHostActivity"
+        tools:ignore="MergeRootFrame">
+
+        <ImageView
+            android:id="@+id/musicDetailAlbum"
+            android:layout_width="@dimen/album_size"
+            android:layout_height="@dimen/album_size"
+            android:layout_margin="8dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+        <LinearLayout
+            android:id="@+id/linearLayoutMusicTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_info_detail"
+            android:background="@drawable/border_info_music"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/musicDetailAlbum">
+
+            <TextView
+                style="@style/TextViewDetailLabel"
+                android:layout_width="@dimen/height_adaptable"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="@string/title" />
+
+            <TextView
+                android:id="@+id/musicTitle"
+                style="@style/TextViewDetailInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="end"
+                android:paddingStart="@dimen/padding_start_detail"
+                android:paddingEnd="@dimen/padding_end_detail"
+                tools:text="@string/title" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutMusicArtist"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_info_detail"
+            android:background="@drawable/border_info_music"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutMusicTitle">
+
+            <TextView
+                style="@style/TextViewDetailLabel"
+                android:layout_width="@dimen/height_adaptable"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="@string/artist" />
+
+            <TextView
+                android:id="@+id/musicDetailArtist"
+                style="@style/TextViewDetailInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="end"
+                tools:text="@string/title" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutMusicAlbum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_info_detail"
+            android:background="@drawable/border_info_music"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutMusicArtist">
+
+            <TextView
+                style="@style/TextViewDetailLabel"
+                android:layout_width="@dimen/height_adaptable"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="@string/album" />
+
+            <TextView
+                android:id="@+id/musicDetailAlbumText"
+                style="@style/TextViewDetailInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="end"
+                tools:text="@string/title" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutMusicReleaseDate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_info_detail"
+            android:background="@drawable/border_info_music"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutMusicAlbum">
+
+            <TextView
+                style="@style/TextViewDetailLabel"
+                android:layout_width="@dimen/height_adaptable"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="@string/release_date" />
+
+            <TextView
+                android:id="@+id/musicDetailReleaseDate"
+                style="@style/TextViewDetailInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="end"
+                tools:text="@string/title" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutMusicGenre"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_info_detail"
+            android:background="@drawable/border_info_music"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutMusicReleaseDate">
+
+            <TextView
+                style="@style/TextViewDetailLabel"
+                android:layout_width="@dimen/height_adaptable"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:gravity="start"
+                android:text="@string/genre" />
+
+            <TextView
+                android:id="@+id/musicDetailGenre"
+                style="@style/TextViewDetailInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="end"
+                tools:text="@string/title" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/linearLayoutMusicExplicit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_top_info_detail"
+            android:background="@drawable/border_info_music"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:weightSum="3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/linearLayoutMusicGenre">
+
+            <TextView
+                style="@style/TextViewDetailLabel"
+                android:layout_width="@dimen/height_adaptable"
+                android:layout_height="wrap_content"
+                android:layout_weight="2"
+                android:gravity="start"
+                android:text="@string/explicit" />
+
+            <CheckBox
+                android:id="@+id/musicExplicit"
+                style="@style/TextViewDetailInfo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:clickable="false"
+                android:gravity="center_vertical" />
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

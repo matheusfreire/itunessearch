@@ -2,11 +2,20 @@
 <resources>
     <dimen name="item_width">200dp</dimen>
     <dimen name="app_bar_height">200dp</dimen>
-    <dimen name="container_horizontal_margin">16dp</dimen>
+    <dimen name="container_horizontal_margin">8dp</dimen>
     <dimen name="height_adaptable">0dp</dimen>
     <dimen name="album_size">100dp</dimen>
     <dimen name="track_content_padding">10dp</dimen>
     <dimen name="container_margin">48dp</dimen>
     <dimen name="padding_list">8dp</dimen>
     <dimen name="margin_top_list">8dp</dimen>
+    <dimen name="elevation_card_music">4dp</dimen>
+    <dimen name="margin_card_music">8dp</dimen>
+
+    <dimen name="margin_top_info_detail">6dp</dimen>
+    <dimen name="padding_end_detail">4dp</dimen>
+    <dimen name="padding_start_detail">0dp</dimen>
+    <dimen name="padding_label_start">4dp</dimen>
+    <dimen name="padding_label_end">0dp</dimen>
+    <dimen name="margin_info_layout">8dp</dimen>
 </resources>
