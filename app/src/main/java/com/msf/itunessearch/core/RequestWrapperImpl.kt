@@ -1,7 +1,7 @@
 package com.msf.itunessearch.core
 
-import java.io.IOException
 import retrofit2.HttpException
+import java.io.IOException
 
 class RequestWrapperImpl : RequestWrapper {
     override suspend fun <D> wrapper(call: suspend () -> D): Either<D, Throwable> {

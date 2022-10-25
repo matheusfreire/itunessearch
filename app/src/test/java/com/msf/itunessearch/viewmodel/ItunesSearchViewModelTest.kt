@@ -15,6 +15,7 @@ import io.mockk.mockk
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.TestCoroutineDispatcher
 import kotlinx.coroutines.test.setMain
 import org.junit.Before
 import org.junit.Rule
@@ -33,7 +34,7 @@ internal class ItunesSearchViewModelTest {
     @get:Rule
     private val testCoroutineRule = TestCoroutineRule()
 
-    private val testDispatcher = StandardTestDispatcher()
+    private val testDispatcher = TestCoroutineDispatcher()
 
     @Before
     fun setUp() {
@@ -61,7 +62,11 @@ internal class ItunesSearchViewModelTest {
             lastArg<(ResultWrapper.Success<TracksResponse>) -> ResultWrapper.Success<TracksResponse>>().invoke(ResultWrapper.Success(StubFactory.tracksResponse))
         }
 
+        testDispatcher.pauseDispatcher()
         viewModel.fetchMusic(anyString(), anyString())
+
+        viewModel.uiStateLiveData.getOrAwaitValue().shouldBeInstanceOf<ItunesUiState.Loading>()
+        testDispatcher.resumeDispatcher()
 
         viewModel.uiStateLiveData.getOrAwaitValue().shouldBeInstanceOf<ItunesUiState.Loaded>()
         val loadedValue = viewModel.uiStateLiveData.getOrAwaitValue() as ItunesUiState.Loaded
@@ -116,8 +121,6 @@ internal class ItunesSearchViewModelTest {
         every { useCase.invoke(any(), any(), any(), any()) } answers {
             thirdArg<(Throwable) -> Throwable>().invoke(Throwable())
         }
-
-        viewModel.fetchMusic(anyString(), anyString())
 
         viewModel.fetchMusic(anyString(), anyString())
 
