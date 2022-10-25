@@ -1,24 +1,20 @@
 package com.msf.itunessearch.ui
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.RecyclerView
 import com.msf.itunessearch.R
 import com.msf.itunessearch.databinding.FragmentMusicListBinding
-import com.msf.itunessearch.extensions.textInputAsFlow
 import com.msf.itunessearch.model.Music
 import com.msf.itunessearch.viewmodel.ItunesSearchViewModel
 import com.msf.itunessearch.viewmodel.ItunesUiState
-import kotlinx.coroutines.FlowPreview
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
 import org.koin.androidx.viewmodel.ext.android.sharedViewModel
 
 class MusicListFragment : Fragment() {
@@ -36,7 +32,6 @@ class MusicListFragment : Fragment() {
         return binding.root
     }
 
-    @OptIn(FlowPreview::class)
     override fun onResume() {
         super.onResume()
         itunesSearchViewModel.uiStateLiveData.observe(viewLifecycleOwner) { uiState ->
@@ -50,15 +45,20 @@ class MusicListFragment : Fragment() {
                 is ItunesUiState.Error -> showMessageLayout(uiState.message, R.drawable.ic_error)
             }
         }
-        binding.txtInputEdit.textInputAsFlow()
-            .onEach {
+
+        binding.txtInputEdit.addTextChangedListener(object : TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) =
+                Unit
+
+            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 itunesSearchViewModel.fetchMusic(
-                    it.toString(),
+                    s.toString(),
                     requireContext().resources.configuration.locales[0].country
                 )
             }
-            .debounce(750)
-            .launchIn(lifecycleScope)
+
+            override fun afterTextChanged(s: Editable?) = Unit
+        })
     }
 
     private fun showLoadingView(showLoading: Boolean) {
