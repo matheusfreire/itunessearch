@@ -1,5 +1,7 @@
 package com.msf.itunessearch.viewmodel
 
+import androidx.annotation.VisibleForTesting
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -12,11 +14,12 @@ class ItunesSearchViewModel(
 ) : ViewModel() {
 
     private val _uiStateLiveData = MutableLiveData<ItunesUiState>()
-    val uiStateLiveData = _uiStateLiveData
+    val uiStateLiveData: LiveData<ItunesUiState> = _uiStateLiveData
+
     private var musics = emptyList<Music>()
 
     private val _titleFragment = MutableLiveData<String>()
-    val titleFragmentLiveData = _titleFragment
+    val titleFragmentLiveData: LiveData<String> = _titleFragment
 
     init {
         _uiStateLiveData.postValue(ItunesUiState.Empty)
@@ -28,6 +31,14 @@ class ItunesSearchViewModel(
         useCase(
             scope = viewModelScope,
             params = Pair(term, country),
+            onError = {
+                _uiStateLiveData.postValue(ItunesUiState.Loading(false))
+                it.message?.let { message ->
+                    _uiStateLiveData.postValue(ItunesUiState.Error(message))
+                } ?: run {
+                    _uiStateLiveData.postValue(ItunesUiState.Error(genericMessageError))
+                }
+            },
             onSuccess = { result ->
                 _uiStateLiveData.postValue(ItunesUiState.Loading(false))
                 when (result) {
@@ -35,18 +46,10 @@ class ItunesSearchViewModel(
                         musics = result.value.musics
                         _uiStateLiveData.postValue(ItunesUiState.Loaded(musics))
                     }
-                    is ResultWrapper.GenericError -> uiStateLiveData.postValue(
+                    is ResultWrapper.GenericError -> _uiStateLiveData.postValue(
                         ItunesUiState.Error(result.error ?: genericMessageError)
                     )
                     else -> _uiStateLiveData.postValue(ItunesUiState.Empty)
-                }
-            },
-            onError = {
-                _uiStateLiveData.postValue(ItunesUiState.Loading(false))
-                it.message?.let { message ->
-                    _uiStateLiveData.postValue(ItunesUiState.Error(message))
-                } ?: run {
-                    _uiStateLiveData.postValue(ItunesUiState.Error(genericMessageError))
                 }
             }
         )
@@ -57,6 +60,12 @@ class ItunesSearchViewModel(
             return musics[position]
         }
         return null
+    }
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    fun setMusics(list: List<Music>) {
+        _uiStateLiveData.postValue(ItunesUiState.Loaded(list))
+        musics = list
     }
 
     fun setTitleActivity(title: String) {
