@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
+import androidx.annotation.VisibleForTesting
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.RecyclerView
@@ -21,7 +22,10 @@ class MusicListFragment : Fragment() {
 
     private val itunesSearchViewModel by sharedViewModel<ItunesSearchViewModel>()
     private var _binding: FragmentMusicListBinding? = null
-    private val binding get() = _binding!!
+
+    @VisibleForTesting(otherwise = VisibleForTesting.PRIVATE)
+    val binding
+        get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater,

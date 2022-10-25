@@ -24,14 +24,15 @@ dependencies {
     testImplementation TestLibs.mockk
     testImplementation TestLibs.kotlin_test
     testImplementation TestLibs.koin_test
+    debugImplementation TestLibs.fragment_testing
     testImplementation TestLibs.test_core
     testImplementation TestLibs.core_testing
     testImplementation TestLibs.coroutines_test
     testImplementation(TestLibs.robolectric) {
         exclude group: 'com.google.auto.service', module: 'auto-service'
     }
+    testImplementation 'org.junit.jupiter:junit-jupiter'
 
-    testImplementation TestLibs.fragment_testing
     /**
      * Instrumented tests dependencies
      */
