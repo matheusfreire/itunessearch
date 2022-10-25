@@ -4,7 +4,6 @@ import com.msf.itunessearch.core.CoroutinesContextProvider
 import com.msf.itunessearch.core.Either
 import com.msf.itunessearch.core.RequestWrapper
 import com.msf.itunessearch.core.UseCase
-import com.msf.itunessearch.model.Music
 import com.msf.itunessearch.model.TracksResponse
 import com.msf.itunessearch.network.ResultWrapper
 import com.msf.itunessearch.repository.ItunesSearchRepository
